@@ -1,10 +1,4 @@
-CREATE DATABASE claimsdb;
-
-CREATE USER claimsuser WITH PASSWORD 'claimspassword';
-
-GRANT ALL PRIVILEGES ON DATABASE claimsdb TO claimsuser;
-
-CREATE TABLE users (
+CREATE TABLE IF NOT EXISTS users (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     email VARCHAR(150) UNIQUE NOT NULL,
@@ -12,7 +6,7 @@ CREATE TABLE users (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE claims (
+CREATE TABLE IF NOT EXISTS claims (
     id SERIAL PRIMARY KEY,
     claim_number VARCHAR(20) UNIQUE,
     customer_name VARCHAR(100) NOT NULL,
@@ -22,7 +16,7 @@ CREATE TABLE claims (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE SEQUENCE claim_number_seq START 1;
+CREATE SEQUENCE IF NOT EXISTS claim_number_seq START 1;
 
 CREATE OR REPLACE FUNCTION generate_claim_number()
 RETURNS TRIGGER AS $$
@@ -33,11 +27,10 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+DROP TRIGGER IF EXISTS claim_number_trigger ON claims;
+
 CREATE TRIGGER claim_number_trigger
 BEFORE INSERT ON claims
 FOR EACH ROW
 WHEN (NEW.claim_number IS NULL)
 EXECUTE FUNCTION generate_claim_number();
-
-GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO claimsuser;
-GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO claimsuser;
