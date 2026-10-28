@@ -1,0 +1,26 @@
+stages:
+  - test
+
+default:
+  tags:
+    - windows-shell
+
+test_backend:
+  stage: test
+
+  before_script:
+    - python --version
+    - python -m venv .venv-ci
+    - .\.venv-ci\Scripts\python.exe -m pip install --upgrade pip
+    - .\.venv-ci\Scripts\python.exe -m pip install -r backend\requirements-dev.txt
+
+  script:
+    - .\.venv-ci\Scripts\python.exe -m pytest backend\tests -v --junitxml=backend\test-results.xml
+
+  artifacts:
+    when: always
+    reports:
+      junit: backend/test-results.xml
+    paths:
+      - backend/test-results.xml
+    expire_in: 1 week
