@@ -51,8 +51,7 @@ sonarqube_quality:
     - 'if (-not $env:SONAR_HOST_URL -or -not $env:SONAR_TOKEN -or -not $env:SONAR_PROJECT_KEY) { throw "Set SONAR_HOST_URL, SONAR_TOKEN, and SONAR_PROJECT_KEY in GitLab CI/CD variables." }'
     - docker version
   script:
-    - 'docker run --rm -e SONAR_HOST_URL="$env:SONAR_HOST_URL" -e SONAR_TOKEN="$env:SONAR_TOKEN" -v "${PWD}:/usr/src" sonarsource/sonar-scanner-cli:latest -Dsonar.projectKey="$env:SONAR_PROJECT_KEY" -Dsonar.sources=. -Dsonar.exclusions="frontend/node_modules/**,backend/venv/**,.venv-ci/**" -Dsonar.python.version=3.10 -Dsonar.qualitygate.wait=true'
-
+    - 'docker run --rm -e SONAR_HOST_URL="$env:SONAR_HOST_URL" -e SONAR_TOKEN="$env:SONAR_TOKEN" -v "${PWD}:/usr/src" sonarsource/sonar-scanner-cli:latest "-Dsonar.projectKey=$env:SONAR_PROJECT_KEY" "-Dsonar.sources=." "-Dsonar.exclusions=frontend/node_modules/**,backend/venv/**,.venv-ci/**" "-Dsonar.python.version=3.10" "-Dsonar.qualitygate.wait=true"'
 build_backend_image:
   stage: build
   before_script:
