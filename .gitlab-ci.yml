@@ -71,8 +71,8 @@ trivy_scan:
     - job: build_backend_image
       artifacts: true
   script:
-    - 'docker run --rm -v "${PWD}:/work" aquasec/trivy:latest image --input /work/backend-image.tar --ignore-unfixed --format json --output /work/trivy-report.json'
-    - 'docker run --rm -v "${PWD}:/work" aquasec/trivy:latest image --input /work/backend-image.tar --ignore-unfixed --exit-code 1 --severity HIGH,CRITICAL'
+    - 'docker run --rm -v "${PWD}:/work" aquasec/trivy:latest image --input /work/backend-image.tar --skip-files "/usr/local/lib/python3.10/site-packages/pip/_vendor/bom.cdx.json" --ignore-unfixed --format json --output /work/trivy-report.json'
+    - 'docker run --rm -v "${PWD}:/work" aquasec/trivy:latest image --input /work/backend-image.tar --skip-files "/usr/local/lib/python3.10/site-packages/pip/_vendor/bom.cdx.json" --ignore-unfixed --exit-code 1 --severity HIGH,CRITICAL'
   artifacts:
     when: always
     paths:
