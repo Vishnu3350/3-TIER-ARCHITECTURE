@@ -1,0 +1,1 @@
+registry.gitlab.com/vardh-devops-lab/3-tier-architecture/backend:37f479a4
