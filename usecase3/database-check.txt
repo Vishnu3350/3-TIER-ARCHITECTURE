@@ -1,0 +1,29 @@
+[
+  {
+    "amount": "24605.00",
+    "claim_number": "CLM-0003",
+    "created_at": "Fri, 13 Nov 2026 09:23:40 GMT",
+    "customer_name": "Kumar",
+    "description": "",
+    "id": 3,
+    "status": "Pending"
+  },
+  {
+    "amount": "150000.01",
+    "claim_number": "CLM-0002",
+    "created_at": "Fri, 13 Nov 2026 09:22:47 GMT",
+    "customer_name": "Nandan",
+    "description": "",
+    "id": 2,
+    "status": "Pending"
+  },
+  {
+    "amount": "25000.00",
+    "claim_number": "CLM-0001",
+    "created_at": "Fri, 13 Nov 2026 09:22:24 GMT",
+    "customer_name": "Vishnu",
+    "description": "",
+    "id": 1,
+    "status": "Pending"
+  }
+]

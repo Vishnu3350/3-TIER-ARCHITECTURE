@@ -1,0 +1,40 @@
+services:
+  db:
+    image: postgres:16
+    container_name: claims-db-uc3
+    environment:
+      POSTGRES_DB: claimsdb
+      POSTGRES_USER: claimsuser
+      POSTGRES_PASSWORD: claimspassword
+    volumes:
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+      - claims_db_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  backend:
+    build:
+      context: ./backend
+    container_name: claims-backend-uc3
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: claimsdb
+      DB_USER: claimsuser
+      DB_PASSWORD: claimspassword
+    depends_on:
+      - db
+    ports:
+      - "5000:5000"
+
+  frontend:
+    build:
+      context: ./frontend
+    container_name: claims-frontend-uc3-compose
+    depends_on:
+      - backend
+    ports:
+      - "8080:80"
+
+volumes:
+  claims_db_data:

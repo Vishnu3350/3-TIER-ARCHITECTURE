@@ -1,0 +1,16 @@
+claims-backend-uc3  |  * Serving Flask app 'app'
+claims-backend-uc3  |  * Debug mode: on
+claims-backend-uc3  | [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+claims-backend-uc3  |  * Running on all addresses (0.0.0.0)
+claims-backend-uc3  |  * Running on http://127.0.0.1:5000
+claims-backend-uc3  |  * Running on http://172.19.0.3:5000
+claims-backend-uc3  | [33mPress CTRL+C to quit[0m
+claims-backend-uc3  |  * Restarting with stat
+claims-backend-uc3  |  * Debugger is active!
+claims-backend-uc3  |  * Debugger PIN: 145-549-231
+claims-backend-uc3  | 172.19.0.1 - - [13/Nov/2026 09:25:42] "GET /api/health HTTP/1.1" 200 -
+claims-backend-uc3  | 172.19.0.1 - - [13/Nov/2026 09:25:43] "GET /api/claims HTTP/1.1" 200 -
+claims-backend-uc3  | 172.19.0.1 - - [13/Nov/2026 09:25:55] "GET /api/claims HTTP/1.1" 200 -
+claims-backend-uc3  | 172.19.0.1 - - [13/Nov/2026 09:38:33] "GET /api/health HTTP/1.1" 200 -
+claims-backend-uc3  | 172.19.0.1 - - [13/Nov/2026 09:39:16] "GET /api/health HTTP/1.1" 200 -
+claims-backend-uc3  | 172.19.0.1 - - [13/Nov/2026 09:39:36] "GET /api/claims HTTP/1.1" 200 -

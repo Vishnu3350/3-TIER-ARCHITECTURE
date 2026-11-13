@@ -1,0 +1,4 @@
+NAME                          IMAGE                          COMMAND                  SERVICE    CREATED          STATUS          PORTS
+claims-backend-uc3            3-tier-architecture-backend    "python app.py"          backend    12 minutes ago   Up 12 minutes   0.0.0.0:5000->5000/tcp, [::]:5000->5000/tcp
+claims-db-uc3                 postgres:16                    "docker-entrypoint.s…"   db         12 minutes ago   Up 12 minutes   0.0.0.0:5432->5432/tcp, [::]:5432->5432/tcp
+claims-frontend-uc3-compose   3-tier-architecture-frontend   "/docker-entrypoint.…"   frontend   12 minutes ago   Up 12 minutes   0.0.0.0:8080->80/tcp, [::]:8080->80/tcp
