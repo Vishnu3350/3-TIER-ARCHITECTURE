@@ -1,0 +1,56 @@
+LAST SEEN   TYPE     REASON              OBJECT                                  MESSAGE
+43h         Normal   ScalingReplicaSet   deployment/claims-db                    Scaled up replica set claims-db-7fc469d96d from 0 to 1
+43h         Normal   Scheduled           pod/claims-db-7fc469d96d-gs4bj          Successfully assigned usecase4/claims-db-7fc469d96d-gs4bj to desktop-control-plane
+43h         Normal   SuccessfulCreate    replicaset/claims-db-7fc469d96d         Created pod: claims-db-7fc469d96d-gs4bj
+43h         Normal   Pulled              pod/claims-db-7fc469d96d-gs4bj          Container image "postgres:16" already present on machine and can be accessed by the pod
+43h         Normal   Created             pod/claims-db-7fc469d96d-gs4bj          Container created
+43h         Normal   Started             pod/claims-db-7fc469d96d-gs4bj          Container started
+43h         Normal   Killing             pod/claims-db-5b7b5569b7-7qdbv          Stopping container postgres
+43h         Normal   ScalingReplicaSet   deployment/claims-db                    Scaled down replica set claims-db-5b7b5569b7 from 1 to 0
+43h         Normal   SuccessfulDelete    replicaset/claims-db-5b7b5569b7         Deleted pod: claims-db-5b7b5569b7-7qdbv
+43h         Normal   Scheduled           pod/claims-frontend-766548cccd-pcbcz    Successfully assigned usecase4/claims-frontend-766548cccd-pcbcz to desktop-control-plane
+43h         Normal   Pulling             pod/claims-frontend-766548cccd-pcbcz    Pulling image "claims-frontend:usecase4"
+43h         Normal   SuccessfulCreate    replicaset/claims-frontend-766548cccd   Created pod: claims-frontend-766548cccd-pcbcz
+43h         Normal   ScalingReplicaSet   deployment/claims-frontend              Scaled up replica set claims-frontend-766548cccd from 0 to 1
+43h         Normal   Started             pod/claims-frontend-766548cccd-pcbcz    Container started
+43h         Normal   Pulled              pod/claims-frontend-766548cccd-pcbcz    Successfully pulled image "claims-frontend:usecase4" in 1.519s (1.519s including waiting). Image size: 26375676 bytes.
+43h         Normal   Created             pod/claims-frontend-766548cccd-pcbcz    Container created
+42m         Normal   Created             pod/claims-frontend-766548cccd-pcbcz    Container created
+42m         Normal   Pulled              pod/claims-frontend-766548cccd-pcbcz    Container image "claims-frontend:usecase4" already present on machine and can be accessed by the pod
+42m         Normal   Started             pod/claims-db-7fc469d96d-gs4bj          Container started
+42m         Normal   SandboxChanged      pod/claims-backend-77564dc744-xj7tg     Pod sandbox changed, it will be killed and re-created.
+42m         Normal   Pulled              pod/claims-backend-77564dc744-xj7tg     Container image "claims-backend:usecase4" already present on machine and can be accessed by the pod
+42m         Normal   Started             pod/claims-frontend-766548cccd-pcbcz    Container started
+42m         Normal   Created             pod/claims-db-7fc469d96d-gs4bj          Container created
+42m         Normal   Started             pod/claims-backend-77564dc744-xj7tg     Container started
+42m         Normal   Pulled              pod/claims-db-7fc469d96d-gs4bj          Container image "postgres:16" already present on machine and can be accessed by the pod
+42m         Normal   SandboxChanged      pod/claims-db-7fc469d96d-gs4bj          Pod sandbox changed, it will be killed and re-created.
+42m         Normal   Created             pod/claims-backend-77564dc744-xj7tg     Container created
+42m         Normal   SandboxChanged      pod/claims-frontend-766548cccd-pcbcz    Pod sandbox changed, it will be killed and re-created.
+5m17s       Normal   Scheduled           pod/curl-test                           Successfully assigned usecase4/curl-test to desktop-control-plane
+5m6s        Normal   Pulling             pod/curl-test                           Pulling image "curlimages/curl"
+5m3s        Normal   Started             pod/curl-test                           Container started
+5m3s        Normal   Created             pod/curl-test                           Container created
+5m6s        Normal   Pulled              pod/curl-test                           Successfully pulled image "curlimages/curl" in 10.704s (10.704s including waiting). Image size: 10853220 bytes.
+5m3s        Normal   Pulled              pod/curl-test                           Successfully pulled image "curlimages/curl" in 2.672s (2.672s including waiting). Image size: 10853220 bytes.
+5m3s        Normal   Killing             pod/curl-test                           Stopping container curl-test
+4m34s       Normal   Scheduled           pod/curl-test                           Successfully assigned usecase4/curl-test to desktop-control-plane
+4m30s       Normal   Pulling             pod/curl-test                           Pulling image "curlimages/curl"
+4m30s       Normal   Pulled              pod/curl-test                           Successfully pulled image "curlimages/curl" in 2.917s (2.917s including waiting). Image size: 10853220 bytes.
+4m26s       Normal   Started             pod/curl-test                           Container started
+4m26s       Normal   Created             pod/curl-test                           Container created
+4m27s       Normal   Pulled              pod/curl-test                           Successfully pulled image "curlimages/curl" in 3.013s (3.013s including waiting). Image size: 10853220 bytes.
+4m26s       Normal   Killing             pod/curl-test                           Stopping container curl-test
+3m47s       Normal   Scheduled           pod/curl-test                           Successfully assigned usecase4/curl-test to desktop-control-plane
+3m46s       Normal   Pulling             pod/curl-test                           Pulling image "curlimages/curl"
+3m43s       Normal   Started             pod/curl-test                           Container started
+3m43s       Normal   Created             pod/curl-test                           Container created
+3m43s       Normal   Pulled              pod/curl-test                           Successfully pulled image "curlimages/curl" in 3.197s (3.197s including waiting). Image size: 10853220 bytes.
+68s         Normal   Pulled              pod/claims-backend-77564dc744-547p7     Container image "claims-backend:usecase4" already present on machine and can be accessed by the pod
+68s         Normal   SuccessfulCreate    replicaset/claims-backend-77564dc744    Created pod: claims-backend-77564dc744-547p7
+68s         Normal   Scheduled           pod/claims-backend-77564dc744-547p7     Successfully assigned usecase4/claims-backend-77564dc744-547p7 to desktop-control-plane
+68s         Normal   Created             pod/claims-backend-77564dc744-547p7     Container created
+68s         Normal   Killing             pod/claims-backend-77564dc744-xj7tg     Stopping container backend
+68s         Normal   Started             pod/claims-backend-77564dc744-547p7     Container started
+10s         Normal   Scheduled           pod/curl-health                         Successfully assigned usecase4/curl-health to desktop-control-plane
+7s          Normal   Scheduled           pod/curl-claims                         Successfully assigned usecase4/curl-claims to desktop-control-plane

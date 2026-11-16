@@ -1,0 +1,4 @@
+{
+  "service": "claims-backend",
+  "status": "healthy"
+}
