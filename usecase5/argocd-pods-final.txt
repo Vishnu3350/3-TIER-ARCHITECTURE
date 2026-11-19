@@ -1,0 +1,4 @@
+NAME                               READY   STATUS    RESTARTS   AGE
+claims-backend-77564dc744-sss5n    1/1     Running   0          6h27m
+claims-db-5859bf6db6-dclqn         1/1     Running   0          6h27m
+claims-frontend-766548cccd-cv7f9   1/1     Running   0          6h27m

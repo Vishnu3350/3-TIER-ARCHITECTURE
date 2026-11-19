@@ -1,0 +1,4 @@
+NAME              TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE
+claims-backend    ClusterIP   10.96.139.222   <none>        5000/TCP   6h27m
+claims-db         ClusterIP   10.96.16.81     <none>        5432/TCP   6h27m
+claims-frontend   ClusterIP   10.96.144.95    <none>        80/TCP     6h27m

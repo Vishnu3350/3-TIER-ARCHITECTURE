@@ -1,0 +1,23 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: claims-app
+  namespace: argocd
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/Vishnu3350/3-TIER-ARCHITECTURE.git
+    targetRevision: feature/usecase5
+    path: helm/claims-app
+    helm:
+      valueFiles:
+        - values-dev.yaml
+
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: usecase5
+
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true

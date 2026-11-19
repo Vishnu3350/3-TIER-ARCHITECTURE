@@ -1,0 +1,9 @@
+NAME                                   READY   STATUS    RESTARTS      AGE
+pod/claims-backend-77564dc744-g5vk8    1/1     Running   1 (16m ago)   17h
+pod/claims-db-5859bf6db6-hxsbw         1/1     Running   1 (16m ago)   17h
+pod/claims-frontend-766548cccd-ps6rj   1/1     Running   1 (16m ago)   17h
+
+NAME                      TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE
+service/claims-backend    ClusterIP   10.96.67.111    <none>        5000/TCP   17h
+service/claims-db         ClusterIP   10.96.162.137   <none>        5432/TCP   17h
+service/claims-frontend   ClusterIP   10.96.245.181   <none>        80/TCP     17h

@@ -1,0 +1,222 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"argoproj.io/v1alpha1","kind":"Application","metadata":{"annotations":{},"name":"claims-app","namespace":"argocd"},"spec":{"destination":{"namespace":"usecase5","server":"https://kubernetes.default.svc"},"project":"default","source":{"helm":{"valueFiles":["values-dev.yaml"]},"path":"helm/claims-app","repoURL":"https://github.com/Vishnu3350/3-TIER-ARCHITECTURE.git","targetRevision":"feature/usecase5"},"syncPolicy":{"syncOptions":["CreateNamespace=true"]}}}
+  creationTimestamp: "2026-11-19T06:01:32Z"
+  generation: 72
+  name: claims-app
+  namespace: argocd
+  resourceVersion: "143498"
+  uid: 8a9bb129-35fe-4190-a3cd-a6acdf47b950
+spec:
+  destination:
+    namespace: usecase5
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    helm:
+      valueFiles:
+      - values-dev.yaml
+    path: helm/claims-app
+    repoURL: https://github.com/Vishnu3350/3-TIER-ARCHITECTURE.git
+    targetRevision: feature/usecase5
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+status:
+  controllerNamespace: argocd
+  health:
+    lastTransitionTime: "2026-11-19T07:01:37Z"
+    status: Healthy
+  history:
+  - deployStartedAt: "2026-11-19T06:58:33Z"
+    deployedAt: "2026-11-19T06:58:33Z"
+    id: 0
+    initiatedBy:
+      username: admin
+    revision: 728821806160b4771fb23b26fd58190e0a22d66c
+    source:
+      helm:
+        valueFiles:
+        - values-dev.yaml
+      path: helm/claims-app
+      repoURL: https://github.com/Vishnu3350/3-TIER-ARCHITECTURE.git
+      targetRevision: feature/usecase5
+  - deployStartedAt: "2026-11-19T07:03:08Z"
+    deployedAt: "2026-11-19T07:03:09Z"
+    id: 1
+    initiatedBy:
+      username: admin
+    revision: 728821806160b4771fb23b26fd58190e0a22d66c
+    source:
+      helm:
+        valueFiles:
+        - values-dev.yaml
+      path: helm/claims-app
+      repoURL: https://github.com/Vishnu3350/3-TIER-ARCHITECTURE.git
+      targetRevision: feature/usecase5
+  operationState:
+    finishedAt: "2026-11-19T07:03:09Z"
+    message: successfully synced (all tasks run)
+    operation:
+      initiatedBy:
+        username: admin
+      retry: {}
+      sync:
+        revision: 728821806160b4771fb23b26fd58190e0a22d66c
+        source:
+          helm:
+            valueFiles:
+            - values-dev.yaml
+          path: helm/claims-app
+          repoURL: https://github.com/Vishnu3350/3-TIER-ARCHITECTURE.git
+          targetRevision: feature/usecase5
+        syncOptions:
+        - CreateNamespace=true
+        syncStrategy:
+          hook: {}
+    phase: Succeeded
+    startedAt: "2026-11-19T07:03:08Z"
+    syncResult:
+      resources:
+      - group: ""
+        hookPhase: Running
+        kind: ConfigMap
+        message: configmap/claims-db-init unchanged
+        name: claims-db-init
+        namespace: usecase5
+        status: Synced
+        syncPhase: Sync
+        version: v1
+      - group: ""
+        hookPhase: Running
+        kind: Service
+        message: service/claims-backend unchanged
+        name: claims-backend
+        namespace: usecase5
+        status: Synced
+        syncPhase: Sync
+        version: v1
+      - group: ""
+        hookPhase: Running
+        kind: Service
+        message: service/claims-frontend unchanged
+        name: claims-frontend
+        namespace: usecase5
+        status: Synced
+        syncPhase: Sync
+        version: v1
+      - group: ""
+        hookPhase: Running
+        kind: Service
+        message: service/claims-db unchanged
+        name: claims-db
+        namespace: usecase5
+        status: Synced
+        syncPhase: Sync
+        version: v1
+      - group: apps
+        hookPhase: Running
+        images:
+        - postgres:16
+        kind: Deployment
+        message: deployment.apps/claims-db unchanged
+        name: claims-db
+        namespace: usecase5
+        status: Synced
+        syncPhase: Sync
+        version: v1
+      - group: apps
+        hookPhase: Running
+        images:
+        - claims-backend:usecase4
+        kind: Deployment
+        message: deployment.apps/claims-backend unchanged
+        name: claims-backend
+        namespace: usecase5
+        status: Synced
+        syncPhase: Sync
+        version: v1
+      - group: apps
+        hookPhase: Running
+        images:
+        - claims-frontend:usecase4
+        kind: Deployment
+        message: deployment.apps/claims-frontend configured
+        name: claims-frontend
+        namespace: usecase5
+        status: Synced
+        syncPhase: Sync
+        version: v1
+      revision: 728821806160b4771fb23b26fd58190e0a22d66c
+      source:
+        helm:
+          valueFiles:
+          - values-dev.yaml
+        path: helm/claims-app
+        repoURL: https://github.com/Vishnu3350/3-TIER-ARCHITECTURE.git
+        targetRevision: feature/usecase5
+  reconciledAt: "2026-11-19T13:25:36Z"
+  resourceHealthSource: appTree
+  resources:
+  - kind: ConfigMap
+    name: claims-db-init
+    namespace: usecase5
+    status: Synced
+    version: v1
+  - kind: Service
+    name: claims-backend
+    namespace: usecase5
+    status: Synced
+    version: v1
+  - kind: Service
+    name: claims-db
+    namespace: usecase5
+    status: Synced
+    version: v1
+  - kind: Service
+    name: claims-frontend
+    namespace: usecase5
+    status: Synced
+    version: v1
+  - group: apps
+    kind: Deployment
+    name: claims-backend
+    namespace: usecase5
+    status: Synced
+    version: v1
+  - group: apps
+    kind: Deployment
+    name: claims-db
+    namespace: usecase5
+    status: Synced
+    version: v1
+  - group: apps
+    kind: Deployment
+    name: claims-frontend
+    namespace: usecase5
+    status: Synced
+    version: v1
+  sourceHydrator: {}
+  sourceType: Helm
+  summary:
+    images:
+    - claims-backend:usecase4
+    - claims-frontend:usecase4
+    - postgres:16
+  sync:
+    comparedTo:
+      destination:
+        namespace: usecase5
+        server: https://kubernetes.default.svc
+      source:
+        helm:
+          valueFiles:
+          - values-dev.yaml
+        path: helm/claims-app
+        repoURL: https://github.com/Vishnu3350/3-TIER-ARCHITECTURE.git
+        targetRevision: feature/usecase5
+    revision: 728821806160b4771fb23b26fd58190e0a22d66c
+    status: Synced

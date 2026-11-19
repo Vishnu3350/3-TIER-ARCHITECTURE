@@ -1,0 +1,31 @@
+NAME: claims-app
+LAST DEPLOYED: Thu Nov 19 11:19:02 2026
+NAMESPACE: usecase5
+STATUS: deployed
+REVISION: 4
+DESCRIPTION: Upgrade complete
+RESOURCES:
+==> v1/ConfigMap
+NAME             DATA   AGE
+claims-db-init   1      17h
+
+==> v1/Service
+NAME             TYPE        CLUSTER-IP     EXTERNAL-IP   PORT(S)    AGE
+claims-backend   ClusterIP   10.96.67.111   <none>        5000/TCP   17h
+claims-frontend   ClusterIP   10.96.245.181   <none>   80/TCP   17h
+claims-db   ClusterIP   10.96.162.137   <none>   5432/TCP   17h
+
+==> v1/Deployment
+NAME             READY   UP-TO-DATE   AVAILABLE   AGE
+claims-backend   1/1     1            1           17h
+claims-frontend   1/1   1     1     17h
+claims-db   1/1   1     1     17h
+
+==> v1/Pod(related)
+NAME                              READY   STATUS    RESTARTS      AGE
+claims-backend-77564dc744-g5vk8   1/1     Running   1 (16m ago)   17h
+claims-frontend-766548cccd-ps6rj   1/1   Running   1 (16m ago)   17h
+claims-db-5859bf6db6-hxsbw   1/1   Running   1 (16m ago)   17h
+
+
+TEST SUITE: None
