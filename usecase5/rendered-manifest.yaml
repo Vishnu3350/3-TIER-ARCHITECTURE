@@ -1,0 +1,223 @@
+---
+# Source: claims-app/templates/postgres.yaml
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: claims-db-init
+data:
+  init.sql: |
+    CREATE TABLE IF NOT EXISTS users (
+        id SERIAL PRIMARY KEY,
+        name VARCHAR(100) NOT NULL,
+        email VARCHAR(150) UNIQUE NOT NULL,
+        password_hash TEXT NOT NULL,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );
+
+    CREATE TABLE IF NOT EXISTS claims (
+        id SERIAL PRIMARY KEY,
+        claim_number VARCHAR(20) UNIQUE,
+        customer_name VARCHAR(100) NOT NULL,
+        amount NUMERIC(12,2) NOT NULL,
+        description TEXT,
+        status VARCHAR(20) DEFAULT 'Pending',
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    );
+
+    CREATE SEQUENCE IF NOT EXISTS claim_number_seq START 1;
+
+    CREATE OR REPLACE FUNCTION generate_claim_number()
+    RETURNS TRIGGER AS $$
+    BEGIN
+        NEW.claim_number :=
+            'CLM-' || LPAD(nextval('claim_number_seq')::TEXT, 4, '0');
+        RETURN NEW;
+    END;
+    $$ LANGUAGE plpgsql;
+
+    DROP TRIGGER IF EXISTS claim_number_trigger ON claims;
+
+    CREATE TRIGGER claim_number_trigger
+    BEFORE INSERT ON claims
+    FOR EACH ROW
+    WHEN (NEW.claim_number IS NULL)
+    EXECUTE FUNCTION generate_claim_number();
+
+
+---
+# Source: claims-app/templates/backend.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: claims-backend
+spec:
+  type: ClusterIP
+  selector:
+    app: claims-backend
+  ports:
+    - port: 5000
+      targetPort: 5000
+---
+# Source: claims-app/templates/frontend.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: claims-frontend
+spec:
+  type: ClusterIP
+  selector:
+    app: claims-frontend
+  ports:
+    - port: 80
+      targetPort: 80
+---
+# Source: claims-app/templates/postgres.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: claims-db
+spec:
+  selector:
+    app: claims-db
+  ports:
+    - port: 5432
+      targetPort: 5432
+---
+# Source: claims-app/templates/backend.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: claims-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: claims-backend
+  template:
+    metadata:
+      labels:
+        app: claims-backend
+    spec:
+      containers:
+        - name: backend
+          image: "claims-backend:usecase4"
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 5000
+
+          env:
+            - name: DB_HOST
+              value: claims-db
+
+            - name: DB_PORT
+              value: "5432"
+
+            - name: DB_NAME
+              value: "claimsdb"
+
+            - name: DB_USER
+              value: "claimsuser"
+
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: claims-db-secret
+                  key: DB_PASSWORD
+
+          readinessProbe:
+            httpGet:
+              path: /api/health
+              port: 5000
+            initialDelaySeconds: 5
+            periodSeconds: 5
+
+          livenessProbe:
+            httpGet:
+              path: /api/health
+              port: 5000
+            initialDelaySeconds: 10
+            periodSeconds: 10
+
+
+---
+# Source: claims-app/templates/frontend.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: claims-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: claims-frontend
+  template:
+    metadata:
+      labels:
+        app: claims-frontend
+    spec:
+      containers:
+        - name: frontend
+          image: "claims-frontend:usecase4"
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 80
+
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 5
+
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 10
+            periodSeconds: 10
+
+
+---
+# Source: claims-app/templates/postgres.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: claims-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: claims-db
+  template:
+    metadata:
+      labels:
+        app: claims-db
+    spec:
+      containers:
+        - name: postgres
+          image: "postgres:16"
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 5432
+
+          env:
+            - name: POSTGRES_DB
+              value: "claimsdb"
+
+            - name: POSTGRES_USER
+              value: "claimsuser"
+
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: claims-db-secret
+                  key: DB_PASSWORD
+
+          volumeMounts:
+            - name: init-script
+              mountPath: /docker-entrypoint-initdb.d
+
+      volumes:
+        - name: init-script
+          configMap:
+            name: claims-db-init

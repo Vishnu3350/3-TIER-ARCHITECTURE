@@ -1,0 +1,37 @@
+frontend:
+  replicaCount: 1
+  image:
+    repository: claims-frontend
+    tag: usecase4
+    pullPolicy: IfNotPresent
+  service:
+    type: ClusterIP
+    port: 80
+  readinessPath: /
+  livenessPath: /
+
+backend:
+  replicaCount: 1
+  image:
+    repository: claims-backend
+    tag: usecase4
+    pullPolicy: IfNotPresent
+  service:
+    type: ClusterIP
+    port: 5000
+  readinessPath: /api/health
+  livenessPath: /api/health
+
+database:
+  replicaCount: 1
+  image:
+    repository: postgres
+    tag: "16"
+    pullPolicy: IfNotPresent
+  service:
+    port: 5432
+  name: claimsdb
+  user: claimsuser
+  passwordSecret:
+    name: claims-db-secret
+    key: DB_PASSWORD
