@@ -1,0 +1,12 @@
+- name: UC7 Ansible operational task
+  hosts: lab
+
+  tasks:
+    - name: Create managed UC7 configuration file
+      ansible.builtin.copy:
+        dest: /home/vishnu/uc7-managed.conf
+        content: |
+          application=3-tier-architecture
+          environment=lab
+          managed_by=ansible
+        mode: '0644'

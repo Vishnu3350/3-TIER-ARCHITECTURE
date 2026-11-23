@@ -1,0 +1,23 @@
+UC7 - Ansible and Vault Notes
+
+Ansible:
+- Inventory used: localhost
+- Connectivity verified with Ansible ping.
+- Check mode showed changed=1 before applying the task.
+- First real playbook run showed changed=1.
+- Second playbook run showed changed=0.
+- This proved idempotency.
+
+Controlled Failure:
+- Ansible sudo/become authentication failed in the local WSL environment.
+- Normal sudo access was verified.
+- The lab task was changed to a safe non-root configuration operation.
+- The playbook then completed successfully.
+
+Vault:
+- HashiCorp Vault dev server was started locally.
+- Vault status confirmed Initialized=true and Sealed=false.
+- A lab secret was created at secret/midhlab/app.
+- Only the safe username field was read for proof.
+- The password was rotated by updating the secret.
+- Real secret values were not saved in evidence.
